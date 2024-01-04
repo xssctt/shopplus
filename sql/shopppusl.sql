@@ -11,7 +11,7 @@
  Target Server Version : 50647
  File Encoding         : 65001
 
- Date: 04/01/2024 10:30:31
+ Date: 04/01/2024 11:36:26
 */
 
 SET NAMES utf8mb4;
@@ -44,20 +44,6 @@ CREATE TABLE `cart_info`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '购物车信息表' ROW_FORMAT = Compact;
 
 -- ----------------------------
--- Table structure for comment_info
--- ----------------------------
-DROP TABLE IF EXISTS `comment_info`;
-CREATE TABLE `comment_info`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '评价内容',
-  `goodsId` bigint(20) NULL DEFAULT NULL COMMENT '所属商品',
-  `userId` bigint(20) NULL DEFAULT NULL COMMENT '评级人ID',
-  `level` int(10) NULL DEFAULT NULL COMMENT '用户等级',
-  `createTime` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建时间',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '商品评价表' ROW_FORMAT = Compact;
-
--- ----------------------------
 -- Table structure for coupon_info
 -- ----------------------------
 DROP TABLE IF EXISTS `coupon_info`;
@@ -69,8 +55,8 @@ CREATE TABLE `coupon_info`  (
   `discount` int(11) NULL DEFAULT NULL COMMENT '优惠金额',
   `min` int(11) NULL DEFAULT NULL COMMENT '最小使用金额',
   `couponStauts` tinyint(4) NULL DEFAULT NULL COMMENT '优惠卷状态',
-  `coupon_start_time` datetime(0) NULL DEFAULT NULL COMMENT '优惠卷开始时间',
-  `coupon_stop_time` datetime(0) NULL DEFAULT NULL,
+  `couponStartTime` datetime(0) NULL DEFAULT NULL COMMENT '优惠卷开始时间',
+  `couponStopTime` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (` couponId`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
 
@@ -90,19 +76,9 @@ CREATE TABLE `goods_info`  (
   `count` int(10) NULL DEFAULT 0 COMMENT '库存',
   `typeId` bigint(20) NULL DEFAULT NULL COMMENT '所属类别',
   `fields` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '商品图片ID，用英文, 隔开',
+  `goodbCode` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '商品条码',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '商品详情表' ROW_FORMAT = Compact;
-
--- ----------------------------
--- Table structure for nx_system_file_info
--- ----------------------------
-DROP TABLE IF EXISTS `nx_system_file_info`;
-CREATE TABLE `nx_system_file_info`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `originName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '原始文件名',
-  `fileName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '存储文件名',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 39 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '文件信息表' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for order_goods_rel
@@ -135,18 +111,6 @@ CREATE TABLE `order_info`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '商品订单信息表' ROW_FORMAT = Compact;
 
 -- ----------------------------
--- Table structure for seckill_info
--- ----------------------------
-DROP TABLE IF EXISTS `seckill_info`;
-CREATE TABLE `seckill_info`  (
-  `id` bigint(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `starttime` datetime(0) NULL DEFAULT NULL,
-  `overtime` datetime(0) NULL DEFAULT NULL,
-  `goodsId` bigint(20) NULL DEFAULT NULL COMMENT '所属商品',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
-
--- ----------------------------
 -- Table structure for type_info
 -- ----------------------------
 DROP TABLE IF EXISTS `type_info`;
@@ -170,16 +134,26 @@ CREATE TABLE `user_info`  (
   `nickName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '昵称',
   `sex` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '性别',
   `age` int(10) NULL DEFAULT NULL COMMENT '年龄',
-  `birthday` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '生日',
   `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '电话',
   `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '地址',
   `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '邮编',
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '电子邮箱',
-  `cardId` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '身份证',
-  `level` int(10) NULL DEFAULT NULL COMMENT '权限等级（1管理员2卖家3买家）',
+  `level` int(10) NULL DEFAULT NULL COMMENT '权限等级(root  c  用户)',
   `account` double(10, 2) NULL DEFAULT NULL COMMENT '余额',
+  `vipid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'vip卡（用户）',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户信息表' ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Table structure for vip_info
+-- ----------------------------
+DROP TABLE IF EXISTS `vip_info`;
+CREATE TABLE `vip_info`  (
+  `id` int(11) NOT NULL COMMENT 'vip卡主键',
+  `vipStartTime` datetime(0) NULL DEFAULT NULL COMMENT 'vip卡生效时间',
+  `vipStopTime` datetime(0) NULL DEFAULT NULL COMMENT 'vip卡过期时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Procedure structure for demo
