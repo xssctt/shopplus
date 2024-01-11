@@ -1,4 +1,4 @@
-package com.example.entity;
+package com.example.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,20 +12,21 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "Category")
-public class CategoryDto {
-    @Column(name = "cover")
-    private String cover;
+@Table(name = "task")
+public class Task {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     @Id
     private Integer id	;
-    @Column(name = "name")
-    private Integer name	;
-    @Column(name = "sort")
-    private Integer sort	;
+
+    @Column(name = "taskname")
+    private String  taskname	;
+
+    @Column(name = "spec")
+    private String  spec	;
+
     @Column(name = "status")
-    private Integer status	;
+    private Integer status	;//状态
 
 }

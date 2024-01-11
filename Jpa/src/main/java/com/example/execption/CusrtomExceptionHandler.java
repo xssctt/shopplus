@@ -9,9 +9,9 @@
 package com.example.execption;
 
 
-import com.example.cashregister.until.HttpUtil;
 //import jakarta.servlet.http.HttpServletRequest;
 import com.example.common.Result;
+import com.example.until.HttpUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;

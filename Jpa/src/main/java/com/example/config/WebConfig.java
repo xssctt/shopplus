@@ -4,8 +4,9 @@ package com.example.config;
 //import com.example.common.JacksonObjectMapper;
 
 
-import com.example.cashregister.interceptor.Tokeninterceptor;
+
 import com.example.common.JacksonObjectMapper;
+import com.example.interceptor.Tokeninterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -58,20 +59,10 @@ public class WebConfig implements WebMvcConfigurer {
     //注册token拦截器
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-//        InterceptorRegistration interceptor=registry.addInterceptor(tokeninterceptor);
-//
-//        //"/api/user/createuser",
-//        // "/api/user/create",  login
-//        // "/api/user/createuserp",  zhuce
-//        // "/api/token/createtoken",
-//        // "/api/sms/createsms"   duanxin
-//
-//        interceptor.addPathPatterns("/api/**")
-//                .excludePathPatterns("/error","/api/user/create");
 
         registry.addInterceptor(tokeninterceptor)
-                .addPathPatterns("/api/**")
-                .excludePathPatterns("/error","/api/user/create");
+                .addPathPatterns("/**")
+                .excludePathPatterns("/passport/token/create","/passport/user/create","error/**");
 //        registry.addInterceptor(repeatSubmitInterceptor)
 //                .addPathPatterns("/**");
 

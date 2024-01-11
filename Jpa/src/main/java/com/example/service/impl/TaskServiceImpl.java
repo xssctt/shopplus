@@ -1,9 +1,9 @@
 package com.example.service.impl;
 
-import com.example.entity.User;
-import com.example.mapper.UserMapper;
-import com.example.service.IUserService;
+import com.example.dto.Task;
+import com.example.mapper.TaskMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.service.ITaskService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
  * @since 2024-01-01
  */
 @Service
-public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
-
+public class TaskServiceImpl extends ServiceImpl<TaskMapper, Task> implements ITaskService {
 
 }

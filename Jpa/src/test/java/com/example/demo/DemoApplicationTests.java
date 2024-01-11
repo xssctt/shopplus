@@ -1,15 +1,28 @@
 package com.example.demo;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 
+import com.example.common.JsonResult;
+import com.example.dto.Task;
+import com.example.entity.Member;
+import com.example.entity.Role;
 import com.example.mapper.UserMapper;
+import com.example.service.IMemberService;
+import com.example.service.IRoleService;
+import com.example.service.ITaskService;
+import com.example.until.StringPwd;
 import org.apache.ibatis.annotations.Mapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @SpringBootTest
 class DemoApplicationTests {
@@ -24,9 +37,9 @@ class DemoApplicationTests {
 //如果 mapper.findByUsername("11") 返回一个包含数据的Optional，那么它将被传递给System.out::println，并打印出来。如果 Optional 为空，那么不会执行任何操作。
     @Test
     void contextLoads() {
-        //System.out.println(mapper.findById(1));
-        mapper.findByUsername("11").ifPresent(System.out::println);
-        mapper.findByUsernameLike("%1%").forEach(System.out::println);
+//        //System.out.println(mapper.findById(1));
+//        mapper.findByUsername("11").ifPresent(System.out::println);
+//        mapper.findByUsernameLike("%1%").forEach(System.out::println);
 //       Count count=new Count();
 //       count.setPassword("111");
 //       count.setUsername("222");
@@ -61,6 +74,40 @@ class DemoApplicationTests {
                             .build();
                 })
                 .execute();
+    }
+
+    @Resource
+    ITaskService taskService;
+
+    @Test
+    void contextLoadpwd() {
+       // String salt=StringPwd.generateSalt().toString();
+        //System.out.println(salt);
+        //A0snxyUMljjTgmNNv3+OTA==
+        //System.out.println(  StringPwd.hashPassword("123user", "A0snxyUMljjTgmNNv3+OTA==") );
+        //sTSyvYPrnP8KCDQWAx0u5y5nza7Fp7QX03iPqvAxtEk=
+        Map<String,String> taskmap=new HashMap<>();
+
+        List<Task> list = taskService.list(new LambdaQueryWrapper<>());
+        for (Task t:list) {
+            taskmap.put(t.getTaskname(),t.getSpec());
+        }
+        System.out.println(taskmap);
+    }
+
+    @Resource
+    IRoleService roleService;
+    @Test
+    void con(){
+        LambdaUpdateWrapper<Role> roleLambdaUpdateWrapper=new LambdaUpdateWrapper<>();
+        roleLambdaUpdateWrapper.set(Role::getStatus,2).eq(Role::getId,1);
+
+        if(roleService.update(roleLambdaUpdateWrapper)){
+
+            System.out.println("111111111111");
+        }else {
+            System.out.println("22222222222222222");
+        }
     }
 
 }
