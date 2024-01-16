@@ -1,7 +1,10 @@
 package com.example.service;
 
+import com.example.common.ListDto;
+import com.example.dto.UserDto;
 import com.example.entity.Product;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IProductService extends IService<Product> {
 
+    ListDto<Product> selectAllByIdAndNameAndStatus(Integer categoryId, String name, Integer limit, Integer page, Integer status);
 }

@@ -94,23 +94,24 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
         memberLambdaQueryWrapper
                 .eq(Member::getName,username);
         Member member=memberMapper.selectOne(memberLambdaQueryWrapper);
+
         if(member == null){
 
             String passwordSalt=StringPwd.generateSalt();
             String passwordHash=StringPwd.hashPassword(password,passwordSalt);
 
-            int insert = memberMapper.insert(Member.builder().name(username).passwordHash(passwordHash).passwordSalt(passwordSalt).build());
+            int insert = memberMapper.insert(Member.builder().name(username).status(1).passwordHash(passwordHash).passwordSalt(passwordSalt).build());
 
             if(insert > 0){
                 //tenantId   创建租户  创建 user role  token
                 Integer memberid=memberMapper.selectOne(new LambdaQueryWrapper<Member>().eq(Member::getName,username)).getId();
 
-//                userMapper.insert(User.builder()
-//                        .name(username).status(1).avatar("").createdAt(TimeUtil.NowTimeToString()).email("").mobile("")
-//                        .build());
-//                Integer userid=userMapper.selectOne(new LambdaQueryWrapper<User>().eq(User::getName,username)).getId();
+                userMapper.insert(User.builder().id(memberid)
+                        .name(username).status(1).avatar("").createdAt(TimeUtil.NowTimeToString()).email("").mobile("")
+                        .build());
+                //Integer userid=userMapper.selectOne(new LambdaQueryWrapper<User>().eq(User::getName,username)).getId();
 
-                roleMapper.insert(Role.builder().name(username).status(1).sort(1).spec("").build());
+               // roleMapper.insert(Role.builder().name(username).status(1).sort(1).spec("").build());
 
 
                 tenantMapper.insert(Tenant.builder()
@@ -159,9 +160,9 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
         //totalPages  多少页
         //page
 
-        if(status == 0){
-            status = null;
-        }
+//        if(status == 0){
+//            status = null;
+//        }
 
         Integer aoffset;
         aoffset = (page - 1) * limit;

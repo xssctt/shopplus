@@ -8,21 +8,21 @@ import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 import com.example.common.JsonResult;
 import com.example.dto.Task;
 import com.example.entity.Member;
+import com.example.entity.Product;
 import com.example.entity.Role;
+import com.example.mapper.RoleMapper;
+import com.example.mapper.TaskMapper;
 import com.example.mapper.UserMapper;
-import com.example.service.IMemberService;
-import com.example.service.IRoleService;
-import com.example.service.ITaskService;
+import com.example.service.*;
 import com.example.until.StringPwd;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Mapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @SpringBootTest
 class DemoApplicationTests {
@@ -97,17 +97,78 @@ class DemoApplicationTests {
 
     @Resource
     IRoleService roleService;
+    @Resource
+    RoleMapper roleMapper;
+    @Resource
+    TaskMapper taskMapper;
     @Test
     void con(){
-        LambdaUpdateWrapper<Role> roleLambdaUpdateWrapper=new LambdaUpdateWrapper<>();
-        roleLambdaUpdateWrapper.set(Role::getStatus,2).eq(Role::getId,1);
+//        List list = roleMapper.selectAllById(1);
+//        System.out.println(list);
+//        List list1 = taskMapper.selectBatchIds(list);
+//        System.out.println(taskMapper.selectBatchIds(list));
 
-        if(roleService.update(roleLambdaUpdateWrapper)){
 
-            System.out.println("111111111111");
+//        List<Integer> taskidlist = roleMapper.selectAllById(1);
+//
+//        Set<String> stringSet=new HashSet<>();
+//        for (Integer id:taskidlist) {
+//            stringSet.add(taskMapper.selectNameByid(id));
+//        }
+//        System.out.println(stringSet);
+
+
+        Role role=Role.builder()
+                .id(3).sort(100).name("xss").spec("xss").status(1).build();
+
+        roleService.update(new LambdaUpdateWrapper<Role>()
+                .set(Role::getName,role.getName())
+                .set(Role::getSpec,role.getSpec())
+                .set(Role::getSort,role.getSort())
+                .eq(Role::getId,role.getId()));
+
+
+
+
+    }
+
+
+
+    @Test
+    void contextLoada() {
+        List<String> list=new ArrayList<>();
+        list.add("plate.manage");
+        list.add("cardCategory.manage");
+        list.add("craft.manage");
+        list.add("plan.manage");
+
+        if(roleService.updateRoleTask(1,list)){
+            System.out.println("ok");
         }else {
-            System.out.println("22222222222222222");
+            System.out.println("no");
         }
+
+    }
+    @Resource
+    IProductService productService;
+
+    @Resource
+    IMemberService memberService;
+
+    @Test
+    void contextLoadb() {
+        productService.update(new LambdaUpdateWrapper<Product>().set(Product::getStatus,2).eq(Product::getId,1));
+      //  memberService.save("xss","xss");
+//
+//        if(productService.save(Product.builder()
+//                .allowDiscount(1).categoryId(1)
+//                .categoryName("分类name").name("商品name").cover("封面图片")
+//                .description("描述").price("11").sort(10).status(1)
+//                .build())){
+//            System.out.println("ok");
+//        }else {
+//            System.out.println("no");
+//        }
     }
 
 }

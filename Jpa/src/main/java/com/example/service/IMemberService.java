@@ -28,4 +28,5 @@ public interface IMemberService extends IService<Member> {
 
     ListDto<UserDto> selectAllByIdAndNameAndStatus(Integer id, String name, Integer status, Integer limit, Integer page);
 
+
 }

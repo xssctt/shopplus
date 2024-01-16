@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Slf4j
 @RestController
@@ -112,43 +113,65 @@ public class RoleTaskController {
     //    GET
     ///passport/roleTask/listRole 角色列表
     @GetMapping("/listRole")
-    public JsonResult<ListDto<RoleDto>> listRole() {
+    public JsonResult<ListDto<RoleDto>> listRole(Integer limit,Integer page,String name,String spec,Integer userid) {
 
-        
-        return new JsonResult<>();
+
+        return new JsonResult<>(roleService.selectAllByNameAndUseridAndApec(limit,page,name,spec,userid));
     }
 
     //    GET
     ///passport/roleTask/listRoleTask 角色权限列表
     @GetMapping("/listRoleTask")
-    public JsonResult<Map<String,String>> listRoleTask() {
-
-        return new JsonResult<>();
+    public JsonResult<Set<String>> listRoleTask(Integer roleid) {
+        return new JsonResult<>( roleService.selectAllById(roleid));
     }
 
     //    POST
     ///passport/roleTask/updateRole 更新角色信息
     @PostMapping("/updateRole")
-    public JsonResult<Map<String,String>> updateRole() {
+    public JsonResult updateRole(Role role) {
 
-        return new JsonResult<>();
+        if(roleService.update(new LambdaUpdateWrapper<Role>()
+                .set(Role::getName,role.getName())
+                .set(Role::getSpec,role.getSpec())
+                .set(Role::getSort,role.getSort())
+                .eq(Role::getId,role.getId()))){
+            log.info("更新角色信息ok");
+            return new JsonResult<>("200","更新角色信息ok");
+        }else {
+            log.info("更新角色信息失败");
+            return new JsonResult<>("1001","更新角色信息失败");
+        }
     }
 
     //    POST
     ///passport/roleTask/updateRoleTask 更新角色权限
 
     @PostMapping("/updateRoleTask")
-    public JsonResult<Map<String,String>> updateRoleTask() {
+    public JsonResult updateRoleTask(Integer roleid,List<String> taskCodeList) {
 
-        return new JsonResult<>();
+        //roleService;
+        if(roleService.updateRoleTask(roleid,taskCodeList)){
+            log.info("更新角色权限ok");
+            return new JsonResult<>("200","更新角色权限ok");
+        }else {
+            log.info("更新角色权限失败");
+            return new JsonResult<>("1001","更新角色权限失败");
+        }
+
     }
 
     //    POST
     ///passport/roleTask/updateUserRole 更新用户角色
 
     @PostMapping("/updateUserRole")
-    public JsonResult<Map<String,String>> updateUserRole() {
-
-        return new JsonResult<>();
+    public JsonResult updateUserRole(Integer userid,List<Integer> taskCodeList) {
+        if(roleService.updateUserRole(userid,taskCodeList)){
+            log.info("更新用户角色ok");
+            return new JsonResult<>("200","更新用户角色ok");
+        }else {
+            log.info("更新用户角色失败");
+            return new JsonResult<>("1001","更新用户角色失败");
+        }
     }
 }

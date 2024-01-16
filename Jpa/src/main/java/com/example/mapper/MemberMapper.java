@@ -33,7 +33,7 @@ public interface MemberMapper extends BaseMapper<Member> {
             " <if test=' name != null and name != \"all\" and name != \" \" ' > " +
             "and name = #{name}" +
             "</if>"+
-            " <if test=' status != null and status != \" \" ' > " +
+            " <if test=' status != null and status != 0 and status != \" \" ' > " +
             "and status = #{status}" +
             "</if>"+
             "</where >"+
@@ -57,4 +57,6 @@ public interface MemberMapper extends BaseMapper<Member> {
             "limit #{alimit} offset #{aoffset}"+
             "</script> ")
     List<Member> selectAllByIdAndNameAndStatuspage(@Param("id") Integer id,@Param("name") String name,@Param("status") Integer status,@Param("alimit") Integer alimit,@Param("aoffset") Integer aoffset);
+
+
 }

@@ -1,7 +1,6 @@
 package com.example.dto;
 
 
-
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
@@ -16,24 +15,19 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "PaymentDetail")
-public class PaymentDetailDto {//支付详细信息
+@Table(name = "roletask")
+public class RoleTask {
 
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
     @Column(name = "id")
     @Id
     private Integer id	;
-    @Column(name = "money")
-    private String money	;
-    @Column(name = "orderNumber")
-    private String orderNumber	;
-    @Column(name = "orderType")
-    private Integer orderType	;
-    @Column(name = "paymentChannelId")
-    private Integer paymentChannelId	;
-    @Column(name = "paymentChannelName")
-    private String  paymentChannelName;
-    @Column(name = "tradeNumber")
-    private String  tradeNumber;
+
+    @Column(name = "roleid")
+   private Integer roleid;
+
+    @Column(name = "taskid")
+   private Integer taskid;
+
 }

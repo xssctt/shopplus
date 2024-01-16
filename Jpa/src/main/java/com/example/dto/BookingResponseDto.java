@@ -1,6 +1,9 @@
 package com.example.dto;
 
 
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,7 +24,8 @@ public class BookingResponseDto {
     private String createdAt;
     @Column(name = "date")
     private String date	;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @TableId(value = "id", type = IdType.AUTO)
     @Column(name = "id")
     @Id
     private Integer id	;
