@@ -57,15 +57,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         Pagination pagination=Pagination.builder().total(totalPages).page(page).limit(limit).build();
         List<Product> productsroduct = productMapper.selectAllByIdAndNameAndStatuspage(categoryId, name, status, limit, aoffset);
 
-        List<Product> productDtoList=new ArrayList<>();
 
-        for (Product m:productsroduct){
-            productDtoList.add(Product.builder()
-                    .id(m.getId()).status(m.getStatus())
-                    .name(m.getName())
-                    .build());
-        }
-
-        return new ListDto<Product>(productDtoList,pagination);
+        return new ListDto<Product>(productsroduct,pagination);
     }
 }

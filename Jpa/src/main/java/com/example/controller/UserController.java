@@ -26,7 +26,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/passport/user/")
+@RequestMapping("/passport/user")
 public class UserController {
 
     @Resource

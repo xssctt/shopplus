@@ -6,15 +6,20 @@ import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 
 import com.example.common.JsonResult;
+import com.example.common.ListDto;
+import com.example.dto.PlateDto;
 import com.example.dto.Task;
 import com.example.entity.Member;
+import com.example.entity.Plate;
 import com.example.entity.Product;
 import com.example.entity.Role;
+import com.example.mapper.PlateMapper;
 import com.example.mapper.RoleMapper;
 import com.example.mapper.TaskMapper;
 import com.example.mapper.UserMapper;
 import com.example.service.*;
 import com.example.until.StringPwd;
+import com.example.until.ValidateCodeUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Mapper;
 import org.junit.jupiter.api.Test;
@@ -155,9 +160,24 @@ class DemoApplicationTests {
     @Resource
     IMemberService memberService;
 
+    @Resource
+    PlateMapper plateMapper;
+    @Resource
+    IPlateService plateService;
     @Test
     void contextLoadb() {
-        productService.update(new LambdaUpdateWrapper<Product>().set(Product::getStatus,2).eq(Product::getId,1));
+        ListDto<PlateDto> x = plateService.selectAllByIdAndNameAndStatus(null, null, 20, 1, null);
+        System.out.println(x.getPagination().toString());
+        System.out.println(x.getList().toString());
+
+//        plateMapper.update(null, new LambdaUpdateWrapper<Plate>()
+//                .set(Plate::getAreaId,1)
+//                .set(Plate::getName,"sfss")
+//                .set(Plate::getSort,200)
+//                .set(Plate::getPeople,4).eq(Plate::getId,1));
+
+        //System.out.println(ValidateCodeUtils.getNumToken());
+        // productService.update(new LambdaUpdateWrapper<Product>().set(Product::getStatus,2).eq(Product::getId,1));
       //  memberService.save("xss","xss");
 //
 //        if(productService.save(Product.builder()

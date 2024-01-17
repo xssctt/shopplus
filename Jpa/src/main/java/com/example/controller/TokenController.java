@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Slf4j
 @RestController
-@RequestMapping("/passport/token/")
+@RequestMapping("/passport/token")
 public class TokenController {
 
     @Resource

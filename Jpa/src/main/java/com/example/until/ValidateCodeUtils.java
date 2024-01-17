@@ -37,4 +37,26 @@ public class ValidateCodeUtils {
         String hash1 = Integer.toHexString(rdm.nextInt());
         return hash1.substring(0, length);
     }
+
+
+    public static String getStringToken(){
+        Random random = new Random();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 16; i++) {
+            char c = (char)('a' + random.nextInt(26));
+            sb.append(c);
+        }
+        return sb.toString();
+    }
+
+    public static String getNumToken(){
+        Random random = new Random();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 16; i++) {
+            String c = String.valueOf(random.nextInt(10));
+            sb.append(c);
+        }
+        return sb.toString();
+    }
+
 }

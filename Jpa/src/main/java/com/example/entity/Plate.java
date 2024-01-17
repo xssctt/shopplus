@@ -1,8 +1,7 @@
 package com.example.entity;
 
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.*;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -21,6 +20,7 @@ import javax.persistence.*;
 @Table(name = "Plate")
 public class Plate {
 
+    @TableField(value = "areaId")
     @Column(name = "areaId")
     private Integer areaId;
     @Column(name = "code")

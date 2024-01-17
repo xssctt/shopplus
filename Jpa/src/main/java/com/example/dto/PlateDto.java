@@ -14,10 +14,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class PlateDto {
+    private Integer id;
     private Integer areaId;
     private String areaName;
     private String code	;
-    private Integer id;
     private String  name;
     private Integer  people;
     private Integer sort;
