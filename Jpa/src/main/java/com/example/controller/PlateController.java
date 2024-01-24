@@ -11,10 +11,7 @@ import com.example.entity.Plate;
 import com.example.service.IAreaService;
 import com.example.service.IPlateService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -49,7 +46,7 @@ public class PlateController {
 
         //GET
         ///manage/plate/detail 桌台详情
-        @PostMapping("/detail")
+        @GetMapping("/detail")
         public JsonResult<PlateDto> detail(Integer plateid) {
            PlateDto plateDto=plateService.detail(plateid) ;
             return  new JsonResult(plateDto);
@@ -73,7 +70,7 @@ public class PlateController {
 
         //GET
         ///manage/plate/list 桌台列表
-        @PostMapping("/list")
+        @GetMapping("/list")
         public JsonResult<ListDto<PlateDto>> list(@RequestParam(name = "areaid",required = false,defaultValue = "0") Integer areaid,String name, @RequestParam(name = "limit",defaultValue = "20") Integer limit, Integer page, Integer status) {
 
 

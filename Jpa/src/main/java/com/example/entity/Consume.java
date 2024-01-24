@@ -31,13 +31,13 @@ public class Consume implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    private String basePrice;
+    private String basePrice;//原始价格
 
     private Integer billId;
 
     private String createdAt;
 
-    private String price;
+    private String price;//打折后价格
 
     private Integer productId;
 

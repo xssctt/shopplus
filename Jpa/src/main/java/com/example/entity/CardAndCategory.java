@@ -1,5 +1,4 @@
-package com.example.dto;
-
+package com.example.entity;
 
 
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -9,27 +8,20 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "Card")
-public class CardDto {
+@Table(name = "cardandcategory")
+public class CardAndCategory {
 
-    @Column(name = "availableEnd")
-    private String availableEnd	;
 
-    @Column(name = "availableStart")
-    private String availableStart;
-
-    @Column(name = "balance")
-    private String balance;
-
-    @Transient
-    private CardCategoryDto cardCategoryDto;
 
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
@@ -37,8 +29,15 @@ public class CardDto {
     @Id
     private Integer id	;
 
-    @Column(name = "number")
-    private String number	;
+
+    @Column(name = "cardid")
+    private Integer cardid;
+
+    @Column(name = "categoryid")
+    private Integer categoryid;
+    @Column(name = "memberid")
+    private Integer memberid;
+
     @Column(name = "status")
     private Integer status;
 }

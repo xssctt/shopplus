@@ -17,4 +17,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class BillOrderServiceImpl extends ServiceImpl<BillOrderMapper, BillOrder> implements IBillOrderService {
 
+    @Override
+    public Boolean movenplate(Integer plateid, Integer oldplateid, Integer id) {
+        //账单id  ---》  桌台更换
+        //桌台id --》 信息清除  状态改为已结账  --》 需清台
+        return null;
+    }
 }

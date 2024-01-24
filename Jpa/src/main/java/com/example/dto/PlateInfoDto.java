@@ -2,8 +2,6 @@ package com.example.dto;
 
 
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,7 +16,7 @@ public class PlateInfoDto {
     private Integer areaId;
     private String areaName;
     private String  code;
-    private ConsumInfoDto[] consumeInfoList;
+    private ConsumeInfoDto[] consumeInfoList;
     private String createdAt;
     private Integer id	;
     private String name;

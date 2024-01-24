@@ -113,7 +113,7 @@ public class UserController {
 
     //    GET
     ///passport/user/whoami 当前用户信息
-    @PostMapping("/whoami")
+    @GetMapping("/whoami")
     public JsonResult<UserInfoDto> whoami(HttpServletRequest request){
 
         Member member=ThreadContxt.getCruuser();

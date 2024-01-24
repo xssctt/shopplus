@@ -26,7 +26,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Builder
 @TableName("consum_info")
-public class ConsumInfo implements Serializable {
+public class ConsumeInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

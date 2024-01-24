@@ -7,6 +7,7 @@ import com.example.dto.RoleDto;
 import com.example.dto.RoleTask;
 import com.example.dto.Task;
 import com.example.dto.UserDto;
+import com.example.entity.ConsumeCraft;
 import com.example.entity.Member;
 import com.example.entity.Pagination;
 import com.example.entity.Role;
@@ -103,13 +104,20 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
 
 
         //根据 list 找到task对应id  并将它和role关联更新
-        List<Integer> taskidList=new ArrayList<>();
+        List<Integer> taskidList=new ArrayList<>();//new
 
         for (String name:taskCodeList) {
             taskidList.add(taskMapper.selectIdByName(name));
         }
 
-        List<Integer> roletaskList = roleMapper.selectAllById(roleid);
+        List<Integer> roletaskList = roleMapper.selectAllById(roleid);//old
+
+        for (Integer taskid:taskidList) {
+            if( !roleMapper.selectByIdAndTaskId(roleid,taskid) ){
+                roleMapper.insertAllById(roleid,taskid);
+            }
+        }
+
 
         for (Integer taskid:roletaskList) {
 

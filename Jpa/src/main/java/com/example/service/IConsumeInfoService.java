@@ -1,7 +1,8 @@
 package com.example.service;
 
-import com.example.entity.ConsumInfo;
+
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.entity.ConsumeInfo;
 
 /**
  * <p>
@@ -11,6 +12,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author lbw
  * @since 2024-01-01
  */
-public interface IConsumInfoService extends IService<ConsumInfo> {
+public interface IConsumeInfoService extends IService<ConsumeInfo> {
 
 }

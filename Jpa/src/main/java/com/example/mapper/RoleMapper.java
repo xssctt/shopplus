@@ -3,6 +3,7 @@ package com.example.mapper;
 import com.example.dto.RoleTask;
 import com.example.entity.Role;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -62,4 +63,10 @@ public interface RoleMapper extends BaseMapper<Role> {
 
     @Select("select taskid from roletask where roleid=#{roleid}")
     List<Integer> selectAllById(@Param("roleid")  Integer roleid);
+
+    @Select("select * from roletask where roleid=#{roleid} and taskid=#{taskid}")
+    Boolean selectByIdAndTaskId(@Param("roleid")  Integer roleid,@Param("taskid")  Integer taskid);
+
+    @Insert("insert  into roletask(roleid,taskid)  values(#{roleid},#{taskid}) ")
+    Boolean insertAllById(@Param("roleid")  Integer roleid,@Param("taskid")  Integer taskid);
 }

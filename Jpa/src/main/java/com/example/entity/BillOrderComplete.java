@@ -25,13 +25,10 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@TableName("bill_order_complete")
 public class BillOrderComplete implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
 
     private Integer cardId;
 
@@ -49,13 +46,7 @@ public class BillOrderComplete implements Serializable {
 
     private String smallChange;
 
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public Integer getCardId() {
         return cardId;
@@ -124,7 +115,6 @@ public class BillOrderComplete implements Serializable {
     @Override
     public String toString() {
         return "BillOrderComplete{" +
-        "id = " + id +
         ", cardId = " + cardId +
         ", code = " + code +
         ", discount = " + discount +

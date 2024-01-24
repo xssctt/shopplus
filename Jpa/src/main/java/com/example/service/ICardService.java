@@ -1,5 +1,6 @@
 package com.example.service;
 
+import com.example.dto.CardDto;
 import com.example.entity.Card;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ICardService extends IService<Card> {
 
+    CardDto KaiKa(String balance, Integer cardCategoryId, Integer memberId, Integer status);
 }

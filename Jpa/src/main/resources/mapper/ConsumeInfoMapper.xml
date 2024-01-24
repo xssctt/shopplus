@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.ConsumeInfoMapper">
+
+
+
+
+<!--    <select id="selectAllByAllStatus" resultType="java.lang.Integer">-->
+<!--        SELECT count(*) FROM consume_info-->
+<!--        <where>-->
+<!--        <if test=' billId != null and billId != "" ' >-->
+<!--        and billId = #{billId}-->
+<!--        </if>-->
+<!--        <if test=' status != null and status != 0 and status != "" ' >-->
+<!--        and status = #{status}-->
+<!--        </if>-->
+<!--        <if test=' processStatus != null and processStatus != 0 and processStatus != "" ' >-->
+<!--        and processStatus = #{processStatus}-->
+<!--        </if>-->
+<!--        and paymentStatus IN-->
+<!--        <foreach collection="paymentStatus" item="id" open="(" separator="," close=")">-->
+<!--            #{id}-->
+<!--        </foreach>-->
+
+<!--        </where>-->
+<!--    </select>-->
+
+
+<!--    <select id="selectAllByAllStatus" resultType="java.lang.Integer">-->
+<!--        SELECT count(*) FROM consume_info-->
+<!--        <where>-->
+<!--            <if test=' billId != null and billId != "" '>-->
+<!--                AND bill_id = #{billId}-->
+<!--            </if>-->
+<!--            <if test=' status != null and status != 0 and status != "" '>-->
+<!--                AND status = #{status}-->
+<!--            </if>-->
+<!--            <if test=' processStatus != null and processStatus != 0 and processStatus != "" '>-->
+<!--                AND process_status = #{processStatus}-->
+<!--            </if>-->
+<!--            <if test=' paymentStatus != null and paymentStatus.size() > 0 '>-->
+<!--                AND payment_status IN-->
+<!--                <foreach collection="paymentStatus" item="id" open="(" separator="," close=")">-->
+<!--                    #{id}-->
+<!--                </foreach>-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </select>-->
+
+
+</mapper>

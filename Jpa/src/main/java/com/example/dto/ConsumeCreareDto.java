@@ -24,7 +24,7 @@ public class ConsumeCreareDto {
     @Id
     private Integer id	;
 
-    @Transient
+    @Transient  //加工列表
     private Integer[] craftIdList;
 
     @Column(name = "productId")

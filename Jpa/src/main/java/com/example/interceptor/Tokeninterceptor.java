@@ -1,6 +1,7 @@
 package com.example.interceptor;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.example.common.ThreadContxt;
 import com.example.entity.Member;
 import com.example.mapper.MemberMapper;
@@ -19,6 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 public class Tokeninterceptor implements HandlerInterceptor {
 
 
+    @Resource
+    MemberMapper memberMapper;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -34,6 +37,7 @@ public class Tokeninterceptor implements HandlerInterceptor {
 
 
         Member member= JwtUtil.resolveJwt(token);
+
         ThreadContxt.setCruuser(member);
         System.out.println(member.toString());
         return true;

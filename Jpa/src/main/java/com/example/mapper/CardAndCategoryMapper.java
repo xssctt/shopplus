@@ -1,7 +1,8 @@
 package com.example.mapper;
 
-import com.example.entity.ConsumInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.example.entity.Activity;
+import com.example.entity.CardAndCategory;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -13,6 +14,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2024-01-01
  */
 @Mapper
-public interface ConsumInfoMapper extends BaseMapper<ConsumInfo> {
+public interface CardAndCategoryMapper extends BaseMapper<CardAndCategory> {
 
 }

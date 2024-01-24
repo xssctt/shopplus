@@ -17,7 +17,7 @@ import javax.persistence.*;
 @Builder
 @Entity
 @Table(name = "ConsumInfo")
-public class ConsumInfoDto {
+public class ConsumeInfoDto {
 
     @Column(name = "allowDiscount")
     private Integer allowDiscount	;

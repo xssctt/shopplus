@@ -5,22 +5,14 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 
-import com.example.common.JsonResult;
 import com.example.common.ListDto;
 import com.example.dto.PlateDto;
 import com.example.dto.Task;
-import com.example.entity.Member;
-import com.example.entity.Plate;
-import com.example.entity.Product;
+import com.example.entity.Card;
+import com.example.entity.ConsumeInfo;
 import com.example.entity.Role;
-import com.example.mapper.PlateMapper;
-import com.example.mapper.RoleMapper;
-import com.example.mapper.TaskMapper;
-import com.example.mapper.UserMapper;
+import com.example.mapper.*;
 import com.example.service.*;
-import com.example.until.StringPwd;
-import com.example.until.ValidateCodeUtils;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Mapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -191,4 +183,69 @@ class DemoApplicationTests {
 //        }
     }
 
+    @Test
+    void contextLoadad() {
+
+//    String serviceType=new String();
+//            switch (1){
+//        case 1:
+//            serviceType="堂食";
+//            break;
+//        case 2:
+//            serviceType="外卖";
+//            break;
+//        default:
+//            serviceType="";
+//            break;
+//    }
+//        System.out.println(serviceType);
+
+        List<Integer> a=new ArrayList();
+        a.add(1);
+        a.add(2);
+        a.add(3);
+        String b=a.toString();
+        System.out.println(b);
+        String d=b.substring(1,b.length()-1);
+        String[] split = d.split(",");
+        List<Integer> e=new ArrayList<>();
+       for (String s:split){
+           e.add(Integer.valueOf(s));
+       }
+
+        System.out.println(d);
+    }
+
+
+    @Resource
+    ConsumeInfoMapper consumeInfoMapper;
+    @Test
+    void contextLoadadc() {
+
+        List<Integer> list=new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        List<Integer> lista=new ArrayList<>();
+        lista.add(1);
+        lista.add(2);
+
+//        Integer integer = consumeInfoMapper.selectAllByAllStatus(1, null, list, null);
+//        System.out.println(integer);
+
+        List<ConsumeInfo> consumeInfos = consumeInfoMapper.selectAllByIdAndNameAndStatuspage(lista, null, list, null, 5, 0);
+
+        System.out.println(consumeInfos.toString());
+
+    }
+
+
+    @Resource
+    CardCategoryMapper cardCategoryMapper;
+    @Test
+    void contextLoadadd() {
+
+        List<Card> cards = cardCategoryMapper.listCard(1, 1);
+
+        System.out.println(cards.toString());
+    }
 }
